@@ -2,7 +2,7 @@ import { ICountry } from "./ICountryListItem";
 
 export interface ICustomerListItem {
   Title: string;
-  User: number;
+  UserId: number;
   FullName: string;
   DateOfBirth: Date;
   Biography: string;
@@ -10,6 +10,6 @@ export interface ICustomerListItem {
   Age: number;
   Salary: number;
   IsActive: boolean;
-  Picture: string;
-  Country: ICountry;
+  Picture: { Description: string; Url: string };
+  CountryId: number;
 }

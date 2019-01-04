@@ -1,1 +1,3 @@
-export interface IAddCustomerProps {}
+export interface IAddCustomerProps {
+  addCustomer: () => void;
+}
