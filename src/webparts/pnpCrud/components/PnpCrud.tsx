@@ -8,16 +8,20 @@ import CustomersList from "./CustomersList/CustomersList";
 import { ICustomerListItem } from "../../../models/ICustomerListItem";
 import { CustomersService } from "../../../api/services";
 import { IPnpCrudState } from "./IPnpCrudState";
+import SecurityGroups from "./SecurityGroups/SecurityGroups";
+import { ISecurityGroup } from "../../../models/ISecurityGroup";
 
 export default class PnpCrud extends React.Component<IPnpCrudProps, IPnpCrudState> {
   public state: IPnpCrudState = {
-    customers: null
+    customers: null,
+    groups: null
   };
   constructor(props: IPnpCrudProps) {
     super(props);
 
     this.getCustomers = this.getCustomers.bind(this);
     this.addCustomer = this.addCustomer.bind(this);
+    this.doSecurityGroupAction = this.doSecurityGroupAction.bind(this);
 
     this.service = new CustomersService(this.context);
   }
@@ -29,6 +33,8 @@ export default class PnpCrud extends React.Component<IPnpCrudProps, IPnpCrudStat
         <AddCustomer addCustomer={this.addCustomer} />
 
         <CustomersList customers={this.state.customers} getCustomers={this.getCustomers} />
+
+        <SecurityGroups groups={this.state.groups} doSecurityGroupAction={this.doSecurityGroupAction} />
       </div>
     );
   }
@@ -60,6 +66,12 @@ export default class PnpCrud extends React.Component<IPnpCrudProps, IPnpCrudStat
     const createdCustomer: ICustomerListItem = await this.service.addCustomer(newCustomer);
     console.log("NEW ITEM");
     console.log(createdCustomer);
+    return null;
+  }
+
+  private async doSecurityGroupAction(): Promise<ISecurityGroup[]> {
+    const groups: ISecurityGroup[] = await this.service.doSecurityGroupAction();
+    this.setState({ groups });
     return null;
   }
 
