@@ -147,6 +147,7 @@ export class CustomersService {
       //list = await sp.web.lists.getByTitle("RoleInheritance").breakRoleInheritance(true);
       list = await sp.web.lists.getByTitle("RoleInheritance").resetRoleInheritance();
       debugger;
+      //change
     } catch (error) {
       console.log(error);
     }
